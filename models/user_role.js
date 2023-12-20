@@ -12,9 +12,9 @@ const User_role = sequelize.define('user_role', {
         type: DataTypes.INTEGER,
         references: { model: 'role' , key: 'id'},
     },
-    utilisateur_id:{
+    user_id:{
         type: DataTypes.INTEGER,
-        references: { model: 'utilisateur' , key: 'id'},
+        references: { model: 'user' , key: 'id'},
     }
 }, {
     freezeTableName: true,

@@ -4,35 +4,31 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/UserModel');
 const Role = require('../models/Role')
+const User_role = require('../models/user_role')
 const secretKey = process.env.API_KEY;
 
 
 exports.createUtilisateur = async (req, res) => {
   
   try {
+    User_role.sync({force:true})
     const { pseudo, password } = req.body;
-    //Utilisateur_role.sync({force:true})
-    // Vérifier si le pseudo existe déjà
     const existingUser = await User.findOne({ where: { pseudo } });
   
     if (existingUser) {
       return res.status(400).json({ error: 'Ce pseudo existe déjà.' });
     }
-  
-    // Hasher le mot de passe
+
     const hashedPassword = await bcrypt.hash(password, 10);
   
-    // Récupérer le rôle par défaut 'peon'
     const defaultRole = await Role.findOne({ where: { nom: 'role' } });
   
-    // Créer l'utilisateur avec le mot de passe hashé et le rôle par défaut
     const nouvelUtilisateur = await User.create({
       pseudo,
       password: hashedPassword,
       is_super_admin: false,
     });
     console.log(defaultRole)
-    // Associer l'utilisateur au rôle par défaut en utilisant la table intermédiaire utilisateur_role
     if (nouvelUtilisateur) {
       await nouvelUtilisateur.addRole(defaultRole, { through: 'User_role' });
       console.log("Utilisateur associé au rôle par défaut avec succès");

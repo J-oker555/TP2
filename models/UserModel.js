@@ -22,7 +22,7 @@ const User = sequelize.define('User', {
     },
 }, {
     freezeTableName: true,
-    timestamps: false,
+    timestamps: true,
 });
 
 
