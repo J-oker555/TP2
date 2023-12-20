@@ -6,12 +6,15 @@ const bodyParser = require('body-parser');
 //const techroute = require('./Routes/TechnoRoutes');
 //const commentaireRoute = require('./Routes/CommentaireRoutes');
 const userroute = require('./Routes/UserRoutes');
+const usergod = require('./Routes/DieuRoutes')
 const dotenv = require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/', userroute);
+app.use('/god', usergod);
+
 
 
 const port = 3000;

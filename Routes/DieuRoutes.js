@@ -6,6 +6,6 @@ const DieuController = require('../Controllers/DieuController');
 router.get('/dieus', DieuController.getAllGods);
 router.get('/getGod/:id', DieuController.getGod);
 router.post('/addGod', DieuController.ajouterDieu);
-router.post('/delete/:id', DieuController.deleteDieu);
+router.delete('/delete/:id', DieuController.deleteDieu);
 
 module.exports = router;

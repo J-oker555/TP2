@@ -1,7 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../Database/database'); 
+const { DataTypes } = require('sequelize');
+const sequelize = require('../Database/database');
 
-const User = sequelize.define('user', {
+const User = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -11,17 +11,20 @@ const User = sequelize.define('user', {
     pseudo: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
+    }, 
     password: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     is_super_admin: {
-        type: DataTypes.BOOLEAN, 
+        type: DataTypes.STRING,
         allowNull: false,
     },
 }, {
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false,
 });
+
+
 
 module.exports = User;

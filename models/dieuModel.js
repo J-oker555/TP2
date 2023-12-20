@@ -17,7 +17,8 @@ const Dieu = sequelize.define('dieu', {
         allowNull: false,
     },
 }, {
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps:false
 });
 
 module.exports = Dieu;

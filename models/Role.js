@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../Database/database'); 
-const User = require('./UserModel');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../Database/database');
+const User = require('./UserModel'); 
 
-const Role = sequelize.define('role', {
+const Role = sequelize.define('Role', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -13,17 +13,19 @@ const Role = sequelize.define('role', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+
 }, {
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false, 
 });
 
 Role.belongsToMany(User, {
-    through: 'role_user',
+    through: 'user_role',
     foreignKey: 'role_id'
 });
 User.belongsToMany(Role, {
-    through: 'role_user',
+    through: 'user_role',
     foreignKey: 'user_id'
 });
 
-module.exports = Role;
+module.exports = Role; 
